@@ -77,7 +77,7 @@ if (isset($_POST['update'])) {
     $stmt->bind_param("si", $updateUploadFileName, $editId);
     
     if ($stmt->execute()) {
-        updateRecordMsg('view-experience.php');
+        updateRecordMsg('view-technology.php');
     } else {
         failedUpdateRecordMsg();
     }
@@ -419,7 +419,7 @@ if (isset($_POST['update'])) {
                                 <small class="text-muted">Allowed: JPG, JPEG, PNG, GIF, WEBP (Max: 5MB)</small>
                                 <?php if ($editData && !empty($current_data['image_name'])): ?>
                                     <div class="mt-3">
-                                        <img src="../../upload-img/experience/<?= htmlspecialchars($current_data['image_name']) ?>"
+                                        <img src="../../upload-img/experince-technology/<?= htmlspecialchars($current_data['image_name']) ?>"
                                             alt="Current image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                                         <small class="text-muted d-block">Current image</small>
                                     </div>
