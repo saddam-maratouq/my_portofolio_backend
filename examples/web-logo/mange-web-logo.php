@@ -240,15 +240,16 @@ require_once '../../utilityes-functions/recored-msgMange.php';
                 <p class="text-white">Experience</p>
               </a>
               <ul class="dropdown-menu" aria-labelledby="newsDropdown">
-                <li><a class="dropdown-item" href="../about/mange-about.php">Add Technology </a></li>
+                <li><a class="dropdown-item" href="../experience/mange-technology.php">Add Technology </a></li>
+                <li><a class="dropdown-item" href="../experience/mange-experience-info.php">Add Info </a></li>
+                <li><a class="dropdown-item" href="../experience/view-technology.php">View Technology </a></li>
               </ul>
             </li>
 
             <!--  -->
 
 
-            <!-- dropdown services -->
-
+          <!-- dropdown services -->
           <li class="nav-item side dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="material-icons">build</i>
@@ -259,11 +260,10 @@ require_once '../../utilityes-functions/recored-msgMange.php';
               <li><a class="dropdown-item" href="../services/view-services.php"> View All </a></li>
             </ul>
           </li>
+         <!--  -->
 
-        <!--  -->
 
         <!-- dropdown all projects -->
-
         <li class="nav-item side dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="material-icons">folder</i>
@@ -275,59 +275,10 @@ require_once '../../utilityes-functions/recored-msgMange.php';
           </ul>
         </li>
 
-        <!--  -->
-
-
-           <!-- dropdown tab our menu     -->
-            <!-- <li class="nav-item side dropdown ">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="material-icons">local_dining</i>
-                <p class="text-white">Our Menu</p>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="userDropdown">
-
-               
-                <li class="dropdown-submenu  position-relative ">
-                  <a class="dropdown-item dropdown-toggle" role="button">Burgers</a>
-                  <ul class="dropdown-menu right-submenu">
-                    <li><a class="dropdown-item" href="../our-menu/burger/mange-burger.php">Add </a></li>
-                    <li><a class="dropdown-item" href="../our-menu/burger/view-burgers.php">View All</a></li>
-                  </ul>
-                </li>
-
-               
-                <li class="dropdown-submenu  position-relative ">
-                  <a class="dropdown-item dropdown-toggle" role="button">Pizza</a>
-                  <ul class="dropdown-menu right-submenu">
-                    <li><a class="dropdown-item" href="../our-menu/pizza/mange-pizza.php">Add </a></li>
-                    <li><a class="dropdown-item" href="../our-menu/pizza/view-pizzas.php">View All</a></li>
-                  </ul>
-                </li>
-
-               
-                <li class="dropdown-submenu  position-relative ">
-                  <a class="dropdown-item dropdown-toggle" role="button">Pasta</a>
-                  <ul class="dropdown-menu right-submenu">
-                    <li><a class="dropdown-item" href="../our-menu/pasta/mange-pasta.php">Add </a></li>
-                    <li><a class="dropdown-item" href="../our-menu/pasta/view-pastas.php">View All</a></li>
-                  </ul>
-                </li>
-
-                <li class="dropdown-submenu  position-relative ">
-                  <a class="dropdown-item dropdown-toggle" role="button">Fries</a>
-                  <ul class="dropdown-menu right-submenu">
-                    <li><a class="dropdown-item" href="../our-menu/fries/mange-fries.php">Add </a></li>
-                    <li><a class="dropdown-item" href="../our-menu/fries/view-fries.php">View All</a></li>
-                  </ul>
-                </li>
-
-              </ul>
-            </li> -->
 
 
 
-
-            <!-- dropdownrestaurant tables   -->
+          
 
             <!-- dropdown feedbacks   -->
             <li class="nav-item side dropdown">
