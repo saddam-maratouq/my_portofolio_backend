@@ -517,7 +517,7 @@ if (isset($_POST['update'])) {
         <small class="text-muted">Allowed: JPG, JPEG, PNG, GIF, WEBP (Max: 5MB)</small>
         <?php if ($editData && !empty($current_data['image_name'])): ?>
             <div class="mt-3">
-                <img src="../../../upload-img/services/<?= htmlspecialchars($current_data['image_name']) ?>"
+                <img src="../../upload-img/services/<?= htmlspecialchars($current_data['image_name']) ?>"
                     alt="Current image" style="width: 60px; height: 60px; object-fit: cover;">
                 <small class="text-muted d-block">Current image</small>
             </div>
