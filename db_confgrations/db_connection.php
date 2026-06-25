@@ -1,6 +1,7 @@
 
 <?php
 
+
 $dbName = 'Task_28' ; 
 
 $connect = mysqli_connect('127.0.0.1', 'mario' , 'test1234' , $dbName) 

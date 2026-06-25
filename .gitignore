@@ -1,0 +1,6 @@
+.env
+.env.local
+.env.*.local
+
+# Ignore database connection file
+db_confgrations/db_connection.php
