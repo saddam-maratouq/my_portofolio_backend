@@ -349,14 +349,7 @@ if ( is_numeric($deleteID) &&  $deleteID > 0 ) {
               </li>
 
 
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                  <i class="material-icons">person</i>
-                  <p class="d-lg-none d-md-block">
-                    Account
-                  </p>
-                </a>
-              </li> -->
+            
 
             <li class="nav-item dropdown custom-dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
