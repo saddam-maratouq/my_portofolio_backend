@@ -361,7 +361,7 @@ if ( is_numeric($deleteID) &&  $deleteID > 0 ) {
             <li class="nav-item dropdown custom-dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <!-- <i class="material-icons">person</i> -->
-                   <img src="../../../assets/img/Website Logo.png"  class="web-logo"  srcset="">
+                   <img src="../../assets/img/Website Logo.png"  class="web-logo"  srcset="">
                   <p class="d-lg-none d-md-block">Account</p>
                 </a>
                 <ul class="dropdown-menu " aria-labelledby="accountDropdown">

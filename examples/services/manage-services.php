@@ -100,7 +100,7 @@ if (isset($_POST['update'])) {
   #img var  ...
 
   $uploadFileName =  $_FILES['image_name']['name'] ?? '';
-
+ 
   $uploadFileName = ! empty($uploadFileName) ? $uploadFileName : ($current_data['image_name'] ?? null);
 
   $existFile = $current_data["image_name"] ?? null;
@@ -116,26 +116,27 @@ if (isset($_POST['update'])) {
 
     
   updateUploadfile(
-  $uploadfileName,
+   $uploadFileName ,
   $existFile,
   $formFileName , 
   $prefix,
   $targetFileDirectory
   ) ;
 
+  
 
   // UPDATE statement
-  $stmt = $connect->prepare("UPDATE $tableName SET `meal_name` = ?, `ingredients` = ?, `price` = ?, `img_name` = ? WHERE `id` = ?");
+$stmt = $connect->prepare("UPDATE $tableName SET `title` = ?, `description` = ?, `image_name` = ? WHERE `id` = ?");
 
-  $stmt->bind_param("ssdsi", $mealName, $ingredients, $price, $updateUploadFileName, $editId);
+$stmt->bind_param("sssi", $title, $description, $updateUploadFileName, $editId);
 
   if ($stmt->execute()) {
-    updateRecordMsg('view-burgers.php');
+    updateRecordMsg('view-services.php'); 
   } else {
     failedUpdateRecordMsg();
   }
   
-  $stmt->close();
+  $stmt = '' ; 
 }
 
 ?>
@@ -443,7 +444,7 @@ if (isset($_POST['update'])) {
                 <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="accountDropdown" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
                   <!-- <i class="material-icons">person</i> -->
-                  <img src="../../../assets/img/Website Logo.png" class="web-logo" srcset="">
+                  <img src="../../assets/img/Website Logo.png" class="web-logo" srcset="">
                   <p class="d-lg-none d-md-block">Account</p>
                 </a>
                 <ul class="dropdown-menu " aria-labelledby="accountDropdown">
@@ -491,7 +492,7 @@ if (isset($_POST['update'])) {
       <div class="content  ">
         <div class="container-fluid">
           <div class="col-xl-12 col-lg-12">
-                <form action="" method="POST" class="mt-5" enctype="multipart/form-data">
+   <form action="" method="POST" class="mt-5" enctype="multipart/form-data">
 
     <div class="mb-5">
         <label class="text-white">Service Title</label>
