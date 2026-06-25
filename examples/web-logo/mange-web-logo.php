@@ -240,7 +240,7 @@ require_once '../../utilityes-functions/recored-msgMange.php';
                 <p class="text-white">Experience</p>
               </a>
               <ul class="dropdown-menu" aria-labelledby="newsDropdown">
-                <li><a class="dropdown-item" href="../about/mange-about.php">Add Img </a></li>
+                <li><a class="dropdown-item" href="../about/mange-about.php">Add Technology </a></li>
               </ul>
             </li>
 
@@ -256,7 +256,7 @@ require_once '../../utilityes-functions/recored-msgMange.php';
             </a>
             <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
               <li><a class="dropdown-item" href="../services/manage-services.php">Manage Services</a></li>
-              <li><a class="dropdown-item" href="../services/add-service.php">Add Service</a></li>
+              <li><a class="dropdown-item" href="../services/view-services.php"> View All </a></li>
             </ul>
           </li>
 
