@@ -1,15 +1,10 @@
 
 <?php
 
-
 # main variable 
-
 $tableName = "services";
-
 $urlName =  basename($_SERVER['SCRIPT_NAME']) ;
-
 $editPageName = "manage-services.php" ; 
-
 # 
 
 
