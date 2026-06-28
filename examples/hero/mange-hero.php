@@ -1,9 +1,7 @@
 <?php
 
-
-// under stand mange about logic to apply here with img 
-// logic ....   
-
+//todo make dynamic new fun for add and delete img with single directory 
+// delete img if exisit inside same fun update and insert ... 
 
 // show err
 require '../../err_config/err_config.php';
@@ -39,9 +37,7 @@ if (isset($_POST['submit'])) {
 
   $myName = trim($_POST['myName']);
   $title = trim($_POST['title']);
-   // $uploadfileName = $_FILES['hero_img']['name'] ?? null;
-
- 
+   
 
     // trim for extra validate if there space on img or file name
     $imageName =trim($_FILES['hero_img']['name']); 
@@ -109,7 +105,7 @@ if (isset($_POST['submit'])) {
   $stmt = '';
 
 
-        // UPDATE (since record already exists)
+      // UPDATE (since record already exists)
     }    else {
 
 
@@ -135,9 +131,6 @@ $stmt->bind_param("sssi", $finalImgName, $myName,  $title , $currentId);
   }
 
 
-
-
- 
 
 
 
