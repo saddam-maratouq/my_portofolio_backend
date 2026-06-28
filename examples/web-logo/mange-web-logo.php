@@ -267,11 +267,11 @@ require_once '../../utilityes-functions/recored-msgMange.php';
         <li class="nav-item side dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="material-icons">folder</i>
-            <p class="text-white">All Projects</p>
+            <p class="text-white">Projects</p>
           </a>
           <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
             <li><a class="dropdown-item" href="../projects/manage-projects.php">Manage Projects</a></li>
-            <li><a class="dropdown-item" href="../projects/add-project.php">Add Project</a></li>
+            <li><a class="dropdown-item" href="../projects/view-projects.php">View All</a></li>
           </ul>
         </li>
 

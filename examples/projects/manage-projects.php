@@ -1,5 +1,10 @@
 <?php
 
+$tableName = "my_projects";
+
+// Manual array for project types
+$projectTypes = ['popular', 'latest', 'following', 'upcoming'];
+
 // show err
 require '../../err_config/err_config.php';
 
@@ -9,48 +14,84 @@ require_once '../../db_confgrations/db_connection.php';
 // get record msg fun update 
 require_once '../../utilityes-functions/recored-msgMange.php';
 
-$tableName = "experience_info";
-
-# current data 
-$sqlCurrent = "SELECT * FROM $tableName";
-$result = mysqli_query($connect, $sqlCurrent);
-$current_data = mysqli_fetch_assoc($result);
-$countRows = mysqli_num_rows($result);
-$currentId = isset($current_data['id']) ? $current_data['id'] : 0;
-
-// ADD or UPDATE ....    
-
-if (isset($_POST['submit'])) {
-
-    $years_of_experience = (int) trim($_POST['years_of_experience']);
-    $phone_number = trim($_POST['phone_number']);
+// mange upload file functions 
+require_once '../../utilityes-functions/mange-upload-files.php';
 
 
-    // INSERT first record
-    if ($countRows === 0) {
-        $stmt = $connect->prepare("INSERT INTO $tableName (`years_of_experience`, `phone_number`) VALUES (?, ?)");
-        $stmt->bind_param("is", $years_of_experience, $phone_number);
+function getVariables()
+{
+    global $project_name, $description, $type;
 
-        if ($stmt->execute()) {
-            addRecordMsg();
-        } else {
-            failedAddRecordMsg();
-        }
-        $stmt = '';
+    $project_name = trim($_POST['project_name']);
+    $description = trim($_POST['description']);
+    $type = trim($_POST['type']);
+}
 
-    // UPDATE (record already exists)
+// for edit record on same form 
+$editId = isset($_GET['id']) ? (int) $_GET['id'] : null;
+$editData = isset($_GET['edit_data']) ? $_GET['edit_data'] : null;
+
+if ($editData === 'true') {
+    $sql = "SELECT * FROM $tableName WHERE id = $editId LIMIT 1";
+    $result = mysqli_query($connect, $sql);
+    $current_data = mysqli_fetch_assoc($result);
+}
+
+
+if (isset($_POST['add'])) {
+    getVariables();
+
+    // img upload variable 
+    $uploadfileName = $_FILES['image_name']['name'] ?? null;
+
+    $fileTarget = '../../upload-img/projects/';
+    $prefix = 'project';
+    $formFileName = 'image_name';
+
+    uploadFile($uploadfileName, $fileTarget, $formFileName, $prefix);
+
+    $stmt = $connect->prepare("INSERT INTO $tableName (`image_name`, `project_name`, `description`, `type`) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $finalFileName, $project_name, $description, $type);
+
+    if ($stmt->execute()) {
+        addRecordMsg();
     } else {
-        $stmt = $connect->prepare("UPDATE $tableName SET `years_of_experience` = ?, `phone_number` = ? WHERE id = ?");
-        $stmt->bind_param("isi", $years_of_experience, $phone_number, $currentId);
-
-        if ($stmt->execute()) {
-            updateRecordMsg('mange-experience-info.php', 1500);
-          
-        } else {
-            failedUpdateRecordMsg(2000);
-        }
-        $stmt = '';
+        failedAddRecordMsg();
     }
+
+    $stmt = '';
+}
+
+// UPDATE
+if (isset($_POST['update'])) {
+    getVariables();
+
+    $uploadFileName = $_FILES['image_name']['name'] ?? '';
+    $uploadFileName = !empty($uploadFileName) ? $uploadFileName : ($current_data['image_name'] ?? null);
+    $existFile = $current_data["image_name"] ?? null;
+
+    $prefix = 'project';
+    $targetFileDirectory = '../../upload-img/projects/';
+    $formFileName = 'image_name';
+
+    updateUploadfile(
+        $uploadFileName,
+        $existFile,
+        $formFileName,
+        $prefix,
+        $targetFileDirectory
+    );
+
+    $stmt = $connect->prepare("UPDATE $tableName SET `project_name` = ?, `description` = ?, `image_name` = ?, `type` = ? WHERE `id` = ?");
+    $stmt->bind_param("ssssi", $project_name, $description, $updateUploadFileName, $type, $editId);
+
+    if ($stmt->execute()) {
+        updateRecordMsg('view-projects.php');
+    } else {
+        failedUpdateRecordMsg();
+    }
+
+    $stmt = '';
 }
 
 ?>
@@ -60,14 +101,13 @@ if (isset($_POST['submit'])) {
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Admin Site Portfolio - Experience Info</title>
+    <title>Admin Site Portfolio - Projects</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
 
-    <!-- Fonts and material icon icons -->
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -82,7 +122,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="dark-edition">
-    <div class="wrapper">
+    <div class="wrapper ">
         <div class="sidebar" data-color="orange" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text logo-normal">
@@ -100,8 +140,8 @@ if (isset($_POST['submit'])) {
                             <p class="text-white"> users </p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../users/mange-user.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../users/view-users.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../users/mange-user.php">Add</a></li>
+                            <li><a class="dropdown-item" href="../../users/view-users.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -113,7 +153,7 @@ if (isset($_POST['submit'])) {
                             <p class="text-white"> orders </p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../orders/view-orders.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../orders/view-orders.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -125,8 +165,8 @@ if (isset($_POST['submit'])) {
                             <p class="text-white"> bookings tables </p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../booking-tables/mange-booked.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../booking-tables/view-booked.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../booking-tables/mange-booked.php">Add</a></li>
+                            <li><a class="dropdown-item" href="../../booking-tables/view-booked.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -138,7 +178,7 @@ if (isset($_POST['submit'])) {
                             <p class="text-white"> website Logo</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="../web-logo/mange-web-logo.php">Mange Logo</a></li>
+                            <li><a class="dropdown-item" href="../../web-logo/mange-web-logo.php">Mange Logo</a></li>
                         </ul>
                     </li>
 
@@ -150,8 +190,8 @@ if (isset($_POST['submit'])) {
                             <p class="text-white">Sliders</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../hero/mange-hero.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../hero/view-hero.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../hero/mange-hero.php">Add</a></li>
+                            <li><a class="dropdown-item" href="../../hero/view-hero.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -163,13 +203,13 @@ if (isset($_POST['submit'])) {
                             <p class="text-white">offer Meal</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../offer-meals/mange-offer-meal.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../offer-meals/view-offer-meal.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../offer-meals/mange-offer-meal.php">Add</a></li>
+                            <li><a class="dropdown-item" href="../../offer-meals/view-offer-meal.php">View All</a></li>
                         </ul>
                     </li>
 
                     <!-- dropdown tab our menu -->
-                    <li class="nav-item side dropdown">
+                    <li class="nav-item side dropdown alert-warning">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">local_dining</i>
@@ -181,8 +221,8 @@ if (isset($_POST['submit'])) {
                             <li class="dropdown-submenu position-relative">
                                 <a class="dropdown-item dropdown-toggle" role="button">Burgers</a>
                                 <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../our-menu/burger/mange-burger.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../our-menu/burger/view-burgers.php">View All</a></li>
+                                    <li><a class="dropdown-item" href="mange-burger.php">Add</a></li>
+                                    <li><a class="dropdown-item" href="view-burgers.php">View All</a></li>
                                 </ul>
                             </li>
 
@@ -190,8 +230,8 @@ if (isset($_POST['submit'])) {
                             <li class="dropdown-submenu position-relative">
                                 <a class="dropdown-item dropdown-toggle" role="button">Pizza</a>
                                 <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../our-menu/pizza/mange-pizza.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../our-menu/pizza/view-pizzas.php">View All</a></li>
+                                    <li><a class="dropdown-item" href="../pizza/mange-pizza.php">Add</a></li>
+                                    <li><a class="dropdown-item" href="../pizza/view-pizzas.php">View All</a></li>
                                 </ul>
                             </li>
 
@@ -199,8 +239,8 @@ if (isset($_POST['submit'])) {
                             <li class="dropdown-submenu position-relative">
                                 <a class="dropdown-item dropdown-toggle" role="button">Pasta</a>
                                 <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../our-menu/pasta/mange-pasta.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../our-menu/pasta/view-pastas.php">View All</a></li>
+                                    <li><a class="dropdown-item" href="../pasta/mange-pasta.php">Add</a></li>
+                                    <li><a class="dropdown-item" href="../pasta/view-pastas.php">View All</a></li>
                                 </ul>
                             </li>
 
@@ -208,8 +248,8 @@ if (isset($_POST['submit'])) {
                             <li class="dropdown-submenu position-relative">
                                 <a class="dropdown-item dropdown-toggle" role="button">Fries</a>
                                 <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../our-menu/fries/mange-fries.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../our-menu/fries/view-fries.php">View All</a></li>
+                                    <li><a class="dropdown-item" href="../fries/mange-fries.php">Add</a></li>
+                                    <li><a class="dropdown-item" href="../fries/view-fries.php">View All</a></li>
                                 </ul>
                             </li>
 
@@ -224,20 +264,20 @@ if (isset($_POST['submit'])) {
                             <p class="text-white">About</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="newsDropdown">
-                            <li><a class="dropdown-item" href="../about/mange-about.php">Add Img</a></li>
+                            <li><a class="dropdown-item" href="../../about/mange-about.php">Add Img</a></li>
                         </ul>
                     </li>
 
-                    <!-- dropdown restaurant tables -->
+                    <!-- dropdown restaurant tables-->
                     <li class="nav-item side dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">table_restaurant</i>
-                            <p class="text-white">restaurant tables</p>
+                            <p class="text-white">booked table</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../book-tables/mange-table.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../book-tables/view-tables.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../book-tables/mange-table.php">Add</a></li>
+                            <li><a class="dropdown-item" href="../../book-tables/view-tables.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -246,11 +286,11 @@ if (isset($_POST['submit'])) {
                         <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">rate_review</i>
-                            <p class="text-white"> feed backs </p>
+                            <p class="text-white">feed backs</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../Feedback/mange-feedback.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../Feedback/view-feedback.php">View All</a></li>
+                            <li><a class="dropdown-item" href="../../Feedback/mange-feedback.php">Add</a></li>
+                            <li><a class="dropdown-item" href="../../Feedback/view-feedback.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -262,19 +302,20 @@ if (isset($_POST['submit'])) {
                             <p class="text-white">footer</p>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="orderDetailsDropdown">
-                            <li><a class="dropdown-item" href="../footer/mange-footer.php">mange</a></li>
+                            <li><a class="dropdown-item" href="../../footer/mange-footer.php">mange</a></li>
                         </ul>
                     </li>
 
-                    <!-- dropdown experience info -->
+                    <!-- dropdown projects -->
                     <li class="nav-item side dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="experienceInfoDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">info</i>
-                            <p class="text-white">Experience Info</p>
+                            <i class="material-icons">folder</i>
+                            <p class="text-white">Projects</p>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="experienceInfoDropdown">
-                            <li><a class="dropdown-item" href="manage-experience-info.php">Manage</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
+                            <li><a class="dropdown-item" href="manage-projects.php">Add Project</a></li>
+                            <li><a class="dropdown-item" href="view-projects.php">View All</a></li>
                         </ul>
                     </li>
 
@@ -287,9 +328,7 @@ if (isset($_POST['submit'])) {
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top" id="navigation-example">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="javascript:void(0)">
-                            <?= $countRows > 0 ? 'Update' : 'Add' ?>  Info
-                        </a>
+                        <a class="navbar-brand" href="javascript:void(0)"> <?= $editData ? 'Update' : 'Add' ?> Project</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                         aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
@@ -379,28 +418,50 @@ if (isset($_POST['submit'])) {
                 <div class="container-fluid">
                     <div class="col-xl-12 col-lg-12">
 
-                        <form action="" method="POST" class="mt-5">
+                        <form action="" method="POST" class="mt-5" enctype="multipart/form-data">
+
 
                             <div class="mb-4">
-                                <label class="text-white">Years of Experience</label>
-                                <input type="number" name="years_of_experience" class="form-control"
-                                 min="1"   max="20" required
-                                    value="<?= $countRows > 0 ? htmlspecialchars($current_data['years_of_experience'] ?? '') : '' ?>">
-                                <small class="text-muted">Enter number of years (e.g., 5, 10, 15)</small>
+                                <label class="text-white">Project Name</label>
+                                <input type="text" name="project_name" class="form-control" required
+                                    value="<?= $editData ? htmlspecialchars($current_data['project_name'] ?? '', ENT_QUOTES, 'UTF-8') : '' ?>">
                             </div>
 
                             <div class="mb-4">
-                                <label class="text-white">Phone Number</label>
-                               <input type="tel" name="phone_number" class="form-control"
-                                    placeholder="+1234567890" required
-                                    maxlength="16"
-                                    pattern="[\+\d\s\-\(\)]{10,16}"
-                                    value="<?= $countRows > 0 ? htmlspecialchars($current_data['phone_number'] ?? '') : '' ?>">
-                                <small class="text-muted">Format: +1234567890 (max 16 characters)</small>
+                                <label class="text-white">Description</label>
+                                <textarea name="description" class="form-control" rows="4" required
+                                    maxlength="500"><?= $editData ? htmlspecialchars($current_data['description'] ?? '', ENT_QUOTES, 'UTF-8') : '' ?></textarea>
+                                <small class="text-muted">Max 500 characters</small>
                             </div>
 
-                            <button type="submit" name="submit" class="btn w-100 mt-4">
-                                <?= $countRows > 0 ? 'Update' : 'Add' ?> 
+                            <div class="mb-4">
+                                <label class="text-white">Project Type</label>
+                                <select name="type" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <?php foreach ($projectTypes as $typeOption): ?>
+                                        <option value="<?= htmlspecialchars($typeOption) ?>"
+                                            <?= ($editData && $current_data['type'] == $typeOption) ? 'selected' : '' ?>>
+                                            <?= ucfirst(htmlspecialchars($typeOption)) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                             <div class="mb-4">
+                                <label class="text-white">Project Image</label>
+                                <input type="file" name="image_name" class="form-control" accept="image/*" <?= $editData ? '' : 'required' ?>>
+                                <small class="text-muted">Allowed: JPG, JPEG, PNG, GIF, WEBP (Max: 5MB)</small>
+                                <?php if ($editData && !empty($current_data['image_name'])): ?>
+                                    <div class="mt-3">
+                                        <img src="../../upload-img/projects/<?= htmlspecialchars($current_data['image_name']) ?>"
+                                            alt="Current image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                        <small class="text-muted d-block">Current image</small>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <button type="submit" name="<?= $editData ? 'update' : 'add' ?>" class="btn w-100 mt-4">
+                                <?= $editData ? 'Update' : 'Add' ?> Project
                             </button>
 
                         </form>

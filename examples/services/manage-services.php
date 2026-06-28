@@ -39,6 +39,8 @@ $editId   =  isset($_GET['id'])        ? (int) $_GET['id'] : null;
 $editData =  isset($_GET['edit_data']) ? $_GET['edit_data'] : null;  // true or false 
 
 
+
+
 if ($editData === 'true') {
   $sql = " SELECT * from  $tableName  where id = $editId limit 1  ";
   $result = mysqli_query($connect, $sql);
