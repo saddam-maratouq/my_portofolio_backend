@@ -17,10 +17,12 @@ include '../../db_confgrations/delete_utilty.php';
 // show no record added yet alert msg  
 require_once '../../utilityes-functions/no-data-alert.php';
 
+
 $path = '../../upload-img/feedback';
 
 # we get file img to delete it from folder target when record deleted .. 
 $deleteID = isset($_GET['id']) ? $_GET['id'] : null;
+
 
 if (is_numeric($deleteID) && $deleteID > 0) {
     // need current img here to check if exist on folder to delete it ...

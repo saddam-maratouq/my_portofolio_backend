@@ -1,5 +1,8 @@
   <?php
 
+//todo make utitlty func for delete img from derictory when delete recored .... 
+
+
 global $connect ; // issue in extnsion not realted code ... 
   // show err 
   require '../../err_config/err_config.php';
