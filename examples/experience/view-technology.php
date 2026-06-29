@@ -73,198 +73,125 @@ if (is_numeric($deleteID) && $deleteID > 0) {
             <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
                     Creative Team
                 </a></div>
-            <div class="sidebar-wrapper">
-                <ul class="nav">
+             <div class="sidebar-wrapper">
+          <!-- Side bar  -->
+          <ul class="nav">
 
-                    <!-- dropdown tab -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">person</i>
-                            <p class="text-white"> users </p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../users/mange-user.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../../users/view-users.php">View All</a></li>
-                        </ul>
-                    </li>
+             <!-- dropdown tab  -->
+            <li class="nav-item side dropdown   ">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">polymer</i>
+                <p class=" text-white"> website Logo</p>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li> <a class="dropdown-item  " href="../web-logo/mange-web-logo.php">Mange  Logo</a> </li>
+              </ul>
+            </li>
 
-                    <!-- dropdown tab -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">shopping_bag</i>
-                            <p class="text-white"> orders </p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../orders/view-orders.php">View All</a></li>
-                        </ul>
-                    </li>
 
-                    <!-- dropdown tab booking table -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">event_available</i>
-                            <p class="text-white"> bookings tables </p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../booking-tables/mange-booked.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../../booking-tables/view-booked.php">View All</a></li>
-                        </ul>
-                    </li>
+            <!-- dropdown tab slider   -->
+            <li class="nav-item side dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">view_carousel</i>
+                <p class="text-white">Hero</p>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
+                <li><a class="dropdown-item" href="../hero/mange-hero.php">Add </a></li>
+                <li><a class="dropdown-item" href="../hero/view-hero.php">View All</a></li>
+              </ul>
+            </li>
 
-                    <!-- dropdown tab -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">polymer</i>
-                            <p class="text-white"> website Logo</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="../../web-logo/mange-web-logo.php">Mange Logo</a></li>
-                        </ul>
-                    </li>
 
-                    <!-- dropdown tab slider -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">view_carousel</i>
-                            <p class="text-white">Sliders</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../hero/mange-hero.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../../hero/view-hero.php">View All</a></li>
-                        </ul>
-                    </li>
+            <!-- dropdown tab  about  -->
 
-                    <!-- dropdown tab special meal -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">percent</i>
-                            <p class="text-white">offer Meal</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../offer-meals/mange-offer-meal.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../../offer-meals/view-offer-meal.php">View All</a></li>
-                        </ul>
-                    </li>
+            <li class="nav-item side dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">info</i>
+                <p class="text-white">About</p>
 
-                    <!-- dropdown tab our menu -->
-                    <li class="nav-item side dropdown alert-warning">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">local_dining</i>
-                            <p class="text-white">Our Menu</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                <li><a class="dropdown-item" href="../about/mange-about.php">Add Img </a></li>
+              </ul>
+            </li>
+          <!--  -->
 
-                            <!-- sub menu - Burger -->
-                            <li class="dropdown-submenu position-relative">
-                                <a class="dropdown-item dropdown-toggle" role="button">Burgers</a>
-                                <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="mange-burger.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="view-burgers.php">View All</a></li>
-                                </ul>
-                            </li>
 
-                            <!-- sub menu - Pizza -->
-                            <li class="dropdown-submenu position-relative">
-                                <a class="dropdown-item dropdown-toggle" role="button">Pizza</a>
-                                <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../pizza/mange-pizza.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../pizza/view-pizzas.php">View All</a></li>
-                                </ul>
-                            </li>
+            <!-- dropdown experience   -->
 
-                            <!-- sub menu - Pasta -->
-                            <li class="dropdown-submenu position-relative">
-                                <a class="dropdown-item dropdown-toggle" role="button">Pasta</a>
-                                <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../pasta/mange-pasta.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../pasta/view-pastas.php">View All</a></li>
-                                </ul>
-                            </li>
+            <li class="nav-item side dropdown  alert-warning ">
+              <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">work</i>
+                <p class="text-white">Experience</p>
+              </a>
+               <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                <li><a class="dropdown-item" href="mange-technology.php">Add Technology </a></li>
+                <li><a class="dropdown-item" href="mange-experience-info.php">Add Info </a></li>
+                <li><a class="dropdown-item" href="view-technology.php">View Technology </a></li>
+              </ul>
+            </li>
 
-                            <!-- sub menu - Fries -->
-                            <li class="dropdown-submenu position-relative">
-                                <a class="dropdown-item dropdown-toggle" role="button">Fries</a>
-                                <ul class="dropdown-menu right-submenu">
-                                    <li><a class="dropdown-item" href="../fries/mange-fries.php">Add</a></li>
-                                    <li><a class="dropdown-item" href="../fries/view-fries.php">View All</a></li>
-                                </ul>
-                            </li>
+            <!--  -->
 
-                        </ul>
-                    </li>
 
-                    <!-- dropdown tab about -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">info</i>
-                            <p class="text-white">About</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
-                            <li><a class="dropdown-item" href="../../about/mange-about.php">Add Img</a></li>
-                        </ul>
-                    </li>
+          <!-- dropdown services -->
+          <li class="nav-item side dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="material-icons">build</i>
+              <p class="text-white">Services</p>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+              <li><a class="dropdown-item" href="../services/manage-services.php">Manage Services</a></li>
+              <li><a class="dropdown-item" href="../services/view-services.php"> View All </a></li>
+            </ul>
+          </li>
+         <!--  -->
 
-                    <!-- dropdown restaurant tables-->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">table_restaurant</i>
-                            <p class="text-white">booked table</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../book-tables/mange-table.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../../book-tables/view-tables.php">View All</a></li>
-                        </ul>
-                    </li>
 
-                    <!-- dropdown feedback -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">rate_review</i>
-                            <p class="text-white">feed backs</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
-                            <li><a class="dropdown-item" href="../../Feedback/mange-feedback.php">Add</a></li>
-                            <li><a class="dropdown-item" href="../../Feedback/view-feedback.php">View All</a></li>
-                        </ul>
-                    </li>
+        <!-- dropdown all projects -->
+        <li class="nav-item side dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons">folder</i>
+            <p class="text-white">Projects</p>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
+            <li><a class="dropdown-item" href="../projects/manage-projects.php">Manage Projects</a></li>
+            <li><a class="dropdown-item" href="../projects/view-projects.php">View All</a></li>
+          </ul>
+        </li>
 
-                    <!-- dropdown footer -->
-                    <li class="nav-item side dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="orderDetailsDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">dashboard</i>
-                            <p class="text-white">footer</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="orderDetailsDropdown">
-                            <li><a class="dropdown-item" href="../../footer/mange-footer.php">mange</a></li>
-                        </ul>
-                    </li>
 
-                    <!-- dropdown experience gallery -->
-                    <li class="nav-item side dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="experienceDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="material-icons">photo_library</i>
-                            <p class="text-white">Experience Gallery</p>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="experienceDropdown">
-                            <li><a class="dropdown-item" href="manage-experience.php">Add Image</a></li>
-                            <li><a class="dropdown-item" href="view-experience.php">View All</a></li>
-                        </ul>
-                    </li>
 
-                </ul>
-            </div>
+
+          
+
+            <!-- dropdown feedbacks   -->
+            <li class="nav-item side dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="trainingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">rate_review</i>
+                <p class="text-white"> feed backs  </p>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="trainingDropdown">
+                <li><a class="dropdown-item" href="../Feedback/mange-feedback.php">Add </a></li>
+                <li><a class="dropdown-item" href="../Feedback/view-feedback.php">View All</a></li>
+              </ul>
+            </li>
+
+
+
+            <!-- dropdown  tab footer  -->
+            <li class="nav-item side dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="orderDetailsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">contacts</i>
+                <p class="text-white">Contact Us</p>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="orderDetailsDropdown">
+                <li><a class="dropdown-item" href="../footer/mange-footer.php">mange</a></li>
+              </ul>
+            </li>
+          </ul>
+           <!-- End Side bar  -->
+        </div>
         </div>
 
         <div class="main-panel">

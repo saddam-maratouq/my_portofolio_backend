@@ -191,6 +191,7 @@ require_once '../../utilityes-functions/recored-msgMange.php';
             Creative Team
           </a>
         </div>
+
         <div class="sidebar-wrapper">
           <!-- Side bar  -->
           <ul class="nav">
@@ -297,26 +298,11 @@ require_once '../../utilityes-functions/recored-msgMange.php';
 
 
 
-
-            <!-- dropdown tab contact us   -->
-            <li class="nav-item side dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="orderDetailsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="material-icons">contacts</i>
-                <p class="text-white">Contact Us </p>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="orderDetailsDropdown">
-                <li><a class="dropdown-item" href="../contact-us/mange-contact.php">Mange</a></li>
-
-              </ul>
-            </li>
-            <!--  -->
-
-
             <!-- dropdown  tab footer  -->
             <li class="nav-item side dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="orderDetailsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="material-icons">dashboard</i>
-                <p class="text-white">footer</p>
+                <i class="material-icons">contacts</i>
+                <p class="text-white">Contact Us</p>
               </a>
               <ul class="dropdown-menu" aria-labelledby="orderDetailsDropdown">
                 <li><a class="dropdown-item" href="../footer/mange-footer.php">mange</a></li>
@@ -325,7 +311,9 @@ require_once '../../utilityes-functions/recored-msgMange.php';
           </ul>
            <!-- End Side bar  -->
         </div>
+        
       </div>
+
 
       <div class="main-panel">
         <!-- Navbar -->
